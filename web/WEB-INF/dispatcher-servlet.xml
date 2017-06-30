@@ -23,6 +23,8 @@
                 <prop key="login.htm">loginController</prop>
                 <prop key="register.htm">registerController</prop>
                 <prop key="roladmin.htm">registerController</prop>
+                <prop key="admin/crearadmin.htm">registerController</prop>
+                
             </props>
         </property>
     </bean>
@@ -44,6 +46,8 @@
           class="Controller.LoginController" />
     <bean name="registerController"
           class="Controller.RegisterController" />
+    <bean name="adminController"
+          class="Controller.AdminController" />
     
 
 </beans>
