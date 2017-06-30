@@ -5,29 +5,53 @@
  */
 package Service;
 
+import Entity.HibernateUtil;
+import Entity.Rol;
 import Entity.Usuario;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
-@Service("usuarioService")
-@Transactional
 public class UsuarioService {
-    private EntityManager entityManager;
-
-    @PersistenceContext
-    public void setEntityManager(EntityManager entityManager) {
-        this. entityManager = entityManager;
+    
+    
+    public static Usuario getByEmail(String email){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Query qUser = session.createQuery("from Usuario where email=:email");
+        qUser.setParameter("email", email);
+        try{
+            Usuario user = (Usuario) qUser.list().get(0);
+            session.close();
+            return user;
+        } catch (HibernateException e){
+            return null;
+        }
     }
     
-    public Usuario getByName(String usuario){
-        Query query = entityManager.createQuery("FROM usuario r WHERE r.usuario ='"+usuario+"'");
-        return (Usuario) query.getSingleResult();
+    public static void add(Usuario usuario){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        try{
+            usuario.setRol(RolService.getByName("usuario"));
+            Transaction tx = session.beginTransaction();
+            session.save(usuario);
+            tx.commit();
+        } catch (Exception e){
+            System.err.println(e);
+        }
+        
+        session.close();
     }
     
-    public void add(Usuario usuario){
-        entityManager.persist(usuario);
+    public static void add(Usuario usuario, Rol rol){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();usuario.setRol(rol);
+        Transaction tx = session.beginTransaction();
+        session.save(usuario);
+        tx.commit();
+        session.close();
     }
 }

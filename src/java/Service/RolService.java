@@ -13,19 +13,26 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
-@Service
 public class RolService {
     
     
-    public Rol getByName(String rol){
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("from rol where name=''");
-        return (Rol) query.list().get(0);
+    public static Rol getByName(String rol){
+        try{
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            Query query = session.createQuery("from Rol where rol=:rol");
+            query.setParameter("rol", rol);
+            Rol role = (Rol) query.list().get(0);
+            session.close();
+            return role;
+        } catch(Exception e){
+            System.err.println(e);
+            return null;
+        }
+        
     }
     
-    public void add(Rol rol){
+    public static void add(Rol rol){
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();

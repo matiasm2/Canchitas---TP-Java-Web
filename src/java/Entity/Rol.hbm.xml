@@ -6,7 +6,7 @@
     <class name="Entity.Rol" table="rol" schema="public" optimistic-lock="version">
         <id name="rolId" type="int">
             <column name="rol_id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="rol" type="string">
             <column name="rol" length="40" />
