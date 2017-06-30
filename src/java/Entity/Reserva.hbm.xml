@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 29, 2017 7:35:40 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entity.Reserva" table="reserva" schema="public" optimistic-lock="version">
+        <id name="reservaId" type="int">
+            <column name="reserva_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cancha" class="Entity.Cancha" fetch="select">
+            <column name="cancha_id" />
+        </many-to-one>
+        <many-to-one name="usuario" class="Entity.Usuario" fetch="select">
+            <column name="usuario_id" />
+        </many-to-one>
+        <property name="fechainicio" type="date">
+            <column name="fechainicio" length="13" />
+        </property>
+        <property name="fechafin" type="date">
+            <column name="fechafin" length="13" />
+        </property>
+        <property name="pagada" type="java.lang.Boolean">
+            <column name="pagada" />
+        </property>
+        <property name="tokeninvitacion" type="string">
+            <column name="tokeninvitacion" length="120" />
+        </property>
+        <set name="invitacions" table="invitacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="reserva_id" />
+            </key>
+            <one-to-many class="Entity.Invitacion" />
+        </set>
+    </class>
+</hibernate-mapping>
