@@ -6,7 +6,7 @@
     <class name="Entity.Tamanocancha" table="tamanocancha" schema="public" optimistic-lock="version">
         <id name="tamanocanchaId" type="int">
             <column name="tamanocancha_id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="tamanocancha" type="string">
             <column name="tamanocancha" length="120" />

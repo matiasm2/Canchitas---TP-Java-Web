@@ -6,7 +6,7 @@
     <class name="Entity.Invitacion" table="invitacion" schema="public" optimistic-lock="version">
         <id name="invitacionId" type="int">
             <column name="invitacion_id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <many-to-one name="reserva" class="Entity.Reserva" fetch="select">
             <column name="reserva_id" />
