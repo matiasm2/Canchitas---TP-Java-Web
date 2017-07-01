@@ -5,8 +5,10 @@
  */
 package Controller;
 
+import Entity.Tamanocancha;
 import Entity.Usuario;
 import Service.RolService;
+import Service.TamanoCanchaService;
 import Service.UsuarioService;
 import javax.servlet.http.HttpServletRequest;
 import org.mindrot.jbcrypt.BCrypt;
@@ -35,6 +37,25 @@ public class AdminController {
         user.setEmail(request.getParameter("email"));
         user.setContrasena(hash1);
         UsuarioService.add(user, RolService.getByName("administrador"));
+        mav.setViewName("pruebas");
+        return mav;
+    }
+    
+    @RequestMapping(value="admin/creartamanocancha", method = RequestMethod.GET)
+    public ModelAndView crearTamanoCancha(){
+        return new ModelAndView("admin/creartamanocancha");
+        
+    }
+    
+    @RequestMapping(value="admin/creartamanocancha", method = RequestMethod.POST)
+    public ModelAndView crearTamanoCanchaPOST(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("nombre", request.getParameter("tamanocancha"));
+        mav.addObject("email", request.getParameter("precio"));
+        Tamanocancha tamanocancha = new Tamanocancha();
+        tamanocancha.setTamanocancha(request.getParameter("tamanocancha"));
+        tamanocancha.setPrecio(Integer.valueOf(request.getParameter("precio")));
+        TamanoCanchaService.add(tamanocancha);
         mav.setViewName("pruebas");
         return mav;
     }
