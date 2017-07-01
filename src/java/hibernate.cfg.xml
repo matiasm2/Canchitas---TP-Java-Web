@@ -47,13 +47,12 @@ Contributor(s):
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">123456</property>
     <property name="hibernate.enable_lazy_load_no_trans">true</property>
-
-
     <mapping resource="Entity/Rol.hbm.xml"/>
     <mapping resource="Entity/Invitacion.hbm.xml"/>
     <mapping resource="Entity/Reserva.hbm.xml"/>
     <mapping resource="Entity/Cancha.hbm.xml"/>
     <mapping resource="Entity/Usuario.hbm.xml"/>
     <mapping resource="Entity/Tamanocancha.hbm.xml"/>
+    <mapping resource="Entity/Hora.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

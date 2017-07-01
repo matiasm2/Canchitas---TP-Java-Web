@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 29, 2017 7:35:40 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entity.Hora" table="hora" schema="public" optimistic-lock="version">
+        <id name="horaId" type="int">
+            <column name="hora_id" />
+            <generator class="identity" />
+        </id>
+        <property name="hora" type="int">
+            <column name="hora" length="40" />
+        </property>
+        <set name="reservas" table="reserva" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="hora_id" />
+            </key>
+            <one-to-many class="Entity.Reserva" />
+        </set>
+    </class>
+</hibernate-mapping>

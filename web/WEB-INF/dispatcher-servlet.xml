@@ -26,9 +26,10 @@
                 <prop key="bienvenido.htm">siteController</prop>
                 <prop key="agregar.htm">siteController</prop>
                 <prop key="roladmin.htm">registerController</prop>
-                <prop key="admin/crearadmin.htm">registerController</prop>
-                <prop key="admin/creartamanocancha.htm">registerController</prop>
-                <prop key="admin/crearcancha.htm">registerController</prop>
+                <prop key="admin/agregarhoras.htm">adminController</prop>
+                <prop key="admin/crearadmin.htm">adminController</prop>
+                <prop key="admin/creartamanocancha.htm">adminController</prop>
+                <prop key="admin/crearcancha.htm">adminController</prop>
                 
             </props>
         </property>

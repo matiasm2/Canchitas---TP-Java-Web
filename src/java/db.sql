@@ -26,12 +26,17 @@ CREATE TABLE cancha (
     nombre              varchar(40) unique
 );
 
+CREATE TABLE hora (
+    hora_id             SERIAL PRIMARY KEY,
+    hora                integer UNIQUE NOT NULL
+);
+
 CREATE TABLE reserva (
     reserva_id          SERIAL PRIMARY KEY,
     usuario_id          integer REFERENCES usuario,
     cancha_id           integer REFERENCES cancha,
-    fechaInicio         date,
-    fechaFin            date,
+    fecha               date,
+    hora_id             integer REFERENCES hora,
     pagada              boolean,
     tokenInvitacion     varchar(120)
 );

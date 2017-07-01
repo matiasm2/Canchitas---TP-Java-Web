@@ -12,5 +12,10 @@
         <h1><c:out value="${password}"/></h1>
         <h1><c:out value="${hash1}"/></h1>
         <h1><c:out value="${hash2}"/></h1>
+        <c:forEach var="item" items="${lista}">
+            <p>
+                <c:out value='${item.getHora()}'/>
+            </p>
+        </c:forEach>
     </body>
 </html>
