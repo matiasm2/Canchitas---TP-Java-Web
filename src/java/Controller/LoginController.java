@@ -32,24 +32,28 @@ public class LoginController {
         ModelAndView mav = new ModelAndView();
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-        Usuario user = UsuarioService.getByEmail(request.getParameter("email"));
-        String hash = user.getContrasena();
-        if (BCrypt.checkpw(request.getParameter("password"), hash)){
+        try {
+            Usuario user = UsuarioService.getByEmail(request.getParameter("email"));
+            String hash = user.getContrasena();
+            if (BCrypt.checkpw(request.getParameter("password"), hash)){
             String token = BCrypt.hashpw(String.valueOf(System.currentTimeMillis()), BCrypt.gensalt());
             user.setToken(token);
             Transaction tx = session.beginTransaction();
             session.update(user);
             tx.commit();
             if (user.getRol().getRol().equals("administrador")){
-                return new ModelAndView("redirect:/admin/agregaradmin.htm", "usuario", user);
+                return new ModelAndView("redirect:/admin/crearadmin.htm", "usuario", user.getToken());
             } else {
                 return new ModelAndView("redirect:/bienvenido.htm", "usuario", user.getToken());
             }
             
-        } else {
+            } else {
+                mav.setViewName("login");
+            }
+        } catch (Exception e){
+            System.err.println(e);
             mav.setViewName("login");
         }
-        
         session.close();
         return mav;
     }

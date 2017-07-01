@@ -5,10 +5,11 @@
  */
 package Service;
 
+import java.lang.Exception;
+
 import Entity.HibernateUtil;
 import Entity.Rol;
 import Entity.Usuario;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,7 +27,7 @@ public class UsuarioService {
             Usuario user = (Usuario) qUser.list().get(0);
             session.close();
             return user;
-        } catch (HibernateException e){
+        } catch (Exception e){
             return null;
         }
     }
@@ -40,7 +41,7 @@ public class UsuarioService {
             Usuario user = (Usuario) qUser.list().get(0);
             session.close();
             return user;
-        } catch (HibernateException e){
+        } catch (Exception e){
             return null;
         }
     }
@@ -72,7 +73,6 @@ public class UsuarioService {
     public static void update(Usuario usuario){
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-        usuario.setRol(RolService.getByName("usuario"));
         Transaction tx = session.beginTransaction();
         session.update(usuario);
         tx.commit();
