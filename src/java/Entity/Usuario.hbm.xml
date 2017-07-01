@@ -20,6 +20,9 @@
         <property name="contrasena" type="string">
             <column name="contrasena" length="120" />
         </property>
+        <property name="token" type="string">
+            <column name="token" length="120" />
+        </property>
         <set name="invitacions" table="invitacion" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="usuario_id" />

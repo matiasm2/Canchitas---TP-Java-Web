@@ -2,27 +2,28 @@ CREATE DATABASE canchas;
 \c canchas;
 CREATE TABLE rol (
     rol_id          SERIAL PRIMARY KEY,
-    rol             varchar(40)
+    rol             varchar(40) unique
 );
 
 CREATE TABLE usuario (
     usuario_id      SERIAL PRIMARY KEY,
     rol_id          integer REFERENCES rol,
     nombre          varchar(120),
-    email           varchar(120),
-    contrasena      varchar(120)
+    email           varchar(120) unique,
+    contrasena      varchar(120),
+    token           varchar(120) unique
 );
 
 CREATE TABLE tamanocancha (
     tamanocancha_id     SERIAL PRIMARY KEY,
-    tamanocancha        varchar(120),
-    precio              integer
+    tamanocancha        varchar(120) unique,
+    precio              integer 
 );
 
 CREATE TABLE cancha (
     cancha_id           SERIAL PRIMARY KEY,
     tamanocancha        integer REFERENCES tamanocancha,
-    nombre              varchar(40)
+    nombre              varchar(40) unique
 );
 
 CREATE TABLE reserva (

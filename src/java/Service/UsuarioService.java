@@ -31,6 +31,20 @@ public class UsuarioService {
         }
     }
     
+    public static Usuario getByToken(String token){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Query qUser = session.createQuery("from Usuario where token=:token");
+        qUser.setParameter("token", token);
+        try{
+            Usuario user = (Usuario) qUser.list().get(0);
+            session.close();
+            return user;
+        } catch (HibernateException e){
+            return null;
+        }
+    }
+    
     public static void add(Usuario usuario){
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -51,6 +65,16 @@ public class UsuarioService {
         Session session = sessionFactory.openSession();usuario.setRol(rol);
         Transaction tx = session.beginTransaction();
         session.save(usuario);
+        tx.commit();
+        session.close();
+    }
+    
+    public static void update(Usuario usuario){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        usuario.setRol(RolService.getByName("usuario"));
+        Transaction tx = session.beginTransaction();
+        session.update(usuario);
         tx.commit();
         session.close();
     }

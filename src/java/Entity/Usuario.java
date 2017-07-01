@@ -16,6 +16,7 @@ public class Usuario  implements java.io.Serializable {
      private String nombre;
      private String email;
      private String contrasena;
+     private String token;
      private Set invitacions = new HashSet(0);
      private Set reservas = new HashSet(0);
 
@@ -85,7 +86,14 @@ public class Usuario  implements java.io.Serializable {
     public void setReservas(Set reservas) {
         this.reservas = reservas;
     }
-
+    
+    public String getToken(){
+        return this.token;
+    }
+    
+    public void setToken(String token){
+        this.token=token;
+    }
 
 
 

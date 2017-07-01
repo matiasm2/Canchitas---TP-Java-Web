@@ -21,7 +21,10 @@
             <props>
                 <prop key="index.htm">indexController</prop>
                 <prop key="login.htm">loginController</prop>
+                <prop key="salir.htm">loginController</prop>
                 <prop key="register.htm">registerController</prop>
+                <prop key="bienvenido.htm">siteController</prop>
+                <prop key="agregar.htm">siteController</prop>
                 <prop key="roladmin.htm">registerController</prop>
                 <prop key="admin/crearadmin.htm">registerController</prop>
                 <prop key="admin/creartamanocancha.htm">registerController</prop>
@@ -47,6 +50,8 @@
           class="Controller.LoginController" />
     <bean name="registerController"
           class="Controller.RegisterController" />
+    <bean name="siteController"
+          class="Controller.SiteController" />
     <bean name="adminController"
           class="Controller.AdminController" />
     
