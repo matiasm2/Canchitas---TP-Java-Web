@@ -6,31 +6,24 @@
 package Service;
 
 import Entity.HibernateUtil;
-import Entity.Tamanocancha;
-import java.util.List;
+import Entity.Cancha;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class TamanoCanchaService {
+public class CanchaService {
     
-    public static List<Tamanocancha> list(){
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        Query query = session.createQuery("from Tamanocancha");
-        return query.list();
-    }
     
-    public static Tamanocancha getByName(String tamanocancha){
+    public static Cancha getByName(String nombre){
         try{
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             Session session = sessionFactory.openSession();
-            Query query = session.createQuery("from Tamanocancha where tamanocancha=:tamanocancha");
-            query.setParameter("tamanocancha", tamanocancha);
-            Tamanocancha tamano = (Tamanocancha) query.list().get(0);
+            Query query = session.createQuery("from Cancha where nombre=:nombre");
+            query.setParameter("nombre", nombre);
+            Cancha canchae = (Cancha) query.list().get(0);
             session.close();
-            return tamano;
+            return canchae;
         } catch(Exception e){
             System.err.println(e);
             return null;
@@ -38,11 +31,11 @@ public class TamanoCanchaService {
         
     }
     
-    public static void add(Tamanocancha tamanocancha){
+    public static void add(Cancha cancha){
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        session.save(tamanocancha);
+        session.save(cancha);
         tx.commit();
         session.close();
     }

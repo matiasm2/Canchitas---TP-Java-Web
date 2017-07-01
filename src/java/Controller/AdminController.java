@@ -5,8 +5,10 @@
  */
 package Controller;
 
+import Entity.Cancha;
 import Entity.Tamanocancha;
 import Entity.Usuario;
+import Service.CanchaService;
 import Service.RolService;
 import Service.TamanoCanchaService;
 import Service.UsuarioService;
@@ -57,6 +59,26 @@ public class AdminController {
         tamanocancha.setPrecio(Integer.valueOf(request.getParameter("precio")));
         TamanoCanchaService.add(tamanocancha);
         mav.setViewName("pruebas");
+        return mav;
+    }
+    
+    @RequestMapping(value="admin/crearcancha", method = RequestMethod.GET)
+    public ModelAndView crearCancha(){
+        ModelAndView mav = new ModelAndView("admin/crearcancha");
+        mav.addObject("tamanos", TamanoCanchaService.list());
+        return mav;
+        
+    }
+    
+    @RequestMapping(value="admin/crearcancha", method = RequestMethod.POST)
+    public ModelAndView crearCanchaPOST(HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("pruebas");
+        mav.addObject("nombre", request.getParameter("tamanocancha"));
+        mav.addObject("email", request.getParameter("nombre"));
+        Cancha cancha = new Cancha();
+        cancha.setNombre(request.getParameter("nombre"));
+        cancha.setTamanocancha(TamanoCanchaService.getByName(request.getParameter("tamanocancha")));
+        CanchaService.add(cancha);
         return mav;
     }
 }

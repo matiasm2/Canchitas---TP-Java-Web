@@ -28,6 +28,7 @@
                 <prop key="roladmin.htm">registerController</prop>
                 <prop key="admin/crearadmin.htm">registerController</prop>
                 <prop key="admin/creartamanocancha.htm">registerController</prop>
+                <prop key="admin/crearcancha.htm">registerController</prop>
                 
             </props>
         </property>
