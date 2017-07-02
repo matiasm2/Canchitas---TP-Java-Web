@@ -25,6 +25,7 @@
                 <prop key="register.htm">registerController</prop>
                 <prop key="bienvenido.htm">siteController</prop>
                 <prop key="agregar.htm">siteController</prop>
+                <prop key="horario.htm">siteController</prop>
                 <prop key="roladmin.htm">registerController</prop>
                 <prop key="admin/agregarhoras.htm">adminController</prop>
                 <prop key="admin/crearadmin.htm">adminController</prop>

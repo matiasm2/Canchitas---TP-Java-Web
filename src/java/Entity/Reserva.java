@@ -15,8 +15,8 @@ public class Reserva  implements java.io.Serializable {
      private int reservaId;
      private Cancha cancha;
      private Usuario usuario;
-     private Date fechainicio;
-     private Date fechafin;
+     private Date fecha;
+     private Hora hora;
      private Boolean pagada;
      private String tokeninvitacion;
      private Set invitacions = new HashSet(0);
@@ -28,12 +28,12 @@ public class Reserva  implements java.io.Serializable {
     public Reserva(int reservaId) {
         this.reservaId = reservaId;
     }
-    public Reserva(int reservaId, Cancha cancha, Usuario usuario, Date fechainicio, Date fechafin, Boolean pagada, String tokeninvitacion, Set invitacions) {
+    public Reserva(int reservaId, Cancha cancha, Usuario usuario, Date fechainicio, Hora hora, Boolean pagada, String tokeninvitacion, Set invitacions) {
        this.reservaId = reservaId;
        this.cancha = cancha;
        this.usuario = usuario;
-       this.fechainicio = fechainicio;
-       this.fechafin = fechafin;
+       this.fecha = fechainicio;
+       this.hora = hora;
        this.pagada = pagada;
        this.tokeninvitacion = tokeninvitacion;
        this.invitacions = invitacions;
@@ -60,19 +60,19 @@ public class Reserva  implements java.io.Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    public Date getFechainicio() {
-        return this.fechainicio;
+    public Date getFecha() {
+        return this.fecha;
     }
     
-    public void setFechainicio(Date fechainicio) {
-        this.fechainicio = fechainicio;
+    public void setFecha(Date fechainicio) {
+        this.fecha = fechainicio;
     }
-    public Date getFechafin() {
-        return this.fechafin;
+    public Hora getHora() {
+        return this.hora;
     }
     
-    public void setFechafin(Date fechafin) {
-        this.fechafin = fechafin;
+    public void setHora(Hora hora) {
+        this.hora = hora;
     }
     public Boolean getPagada() {
         return this.pagada;

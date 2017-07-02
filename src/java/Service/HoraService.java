@@ -7,6 +7,7 @@ package Service;
 
 import Entity.HibernateUtil;
 import Entity.Hora;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,7 +23,15 @@ public class HoraService {
         return query.list();
     }
     
-    public static Hora getByHora(String hora){
+    public static List<Hora> listDisponibles(Date fecha){
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from Reserva r right join r.hora h where r.hora is null  r.fecha=:fecha");
+        query.setParameter("fecha", fecha);
+        return (List<Hora>) query.list();
+    }
+    
+    public static Hora getByHora(int hora){
         try{
             SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
             Session session = sessionFactory.openSession();

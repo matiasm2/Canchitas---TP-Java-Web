@@ -14,12 +14,12 @@
         <many-to-one name="usuario" class="Entity.Usuario" fetch="select">
             <column name="usuario_id" />
         </many-to-one>
-        <property name="fechainicio" type="date">
-            <column name="fechainicio" length="13" />
+        <property name="fecha" type="date">
+            <column name="fecha" length="13" />
         </property>
-        <property name="fechafin" type="date">
-            <column name="fechafin" length="13" />
-        </property>
+        <many-to-one name="hora" class="Entity.Hora" fetch="select">
+            <column name="hora_id"/>
+        </many-to-one>
         <property name="pagada" type="java.lang.Boolean">
             <column name="pagada" />
         </property>
