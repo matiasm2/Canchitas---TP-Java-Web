@@ -10,8 +10,10 @@ import Service.CanchaService;
 import Service.HoraService;
 import Service.LoginService;
 import Entity.Hora;
+import Entity.Invitacion;
 import Entity.Reserva;
 import Entity.Usuario;
+import Service.InvitacionService;
 import Service.MailSendService;
 import Service.ReservaService;
 import Service.UsuarioService;
@@ -109,9 +111,41 @@ public class SiteController {
             reserva.setUsuario(usuario);
             ReservaService.add(reserva);
             MailSendService.sendMailTo(usuario.getEmail(), "Reserva agregada", 
-                    "Reserva agregada, su url para invicationes es localhost:8080/tpf/invitacion?token="+reserva.getTokeninvitacion());
+                    "Reserva agregada, su url para invicationes es localhost:8080/tpf/invitacion.htm?token="+reserva.getTokeninvitacion());
             
             return mav;
+        } else {
+            return new ModelAndView("redirect:/login.htm");
+        }
+    }
+    
+    @RequestMapping(value = "invitacion", method = RequestMethod.GET)
+    public ModelAndView aceptarInvitacion(HttpServletRequest request){
+        if (LoginService.isLogged(request.getParameter("usuario"))){
+            ModelAndView mav = new ModelAndView("site/invitacion");
+            mav.addObject("usuario", request.getParameter("usuario"));
+            return mav;
+        } else {
+            return new ModelAndView("redirect:/login.htm", "tokeninvitacion", request.getParameter("token"));
+        }
+        
+    }
+    
+    @RequestMapping(value = "invitacion", method = RequestMethod.POST)
+    public ModelAndView aceptarInvitacionPOST(HttpServletRequest request) throws ParseException{
+        if (LoginService.isLogged(request.getParameter("usuario"))){
+            ModelAndView mav = new ModelAndView("redirect:/bienvenido.htm","usuario",request.getParameter("usuario"));
+            if (request.getParameter("respuesta").equals("si")){
+                String token = request.getParameter("tokeninvitacion");
+                Usuario usuario = UsuarioService.getByToken(request.getParameter("usuario"));
+                Invitacion invitacion = new Invitacion();
+                invitacion.setReserva(ReservaService.getByToken(token));
+                invitacion.setUsuario(usuario);
+                InvitacionService.add(invitacion);
+                return mav;
+            } else {
+                return mav;
+            }
         } else {
             return new ModelAndView("redirect:/login.htm");
         }

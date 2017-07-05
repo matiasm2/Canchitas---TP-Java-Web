@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,15 +16,16 @@
                     <div class="row">
                         <h1>Iniciar Sesión</h1>
                     </div>
+                    <input name="tokeninvitacion" type="hidden" value="<c:out value='${tokeninvitacion}'/>"/>
                     <div class="row">
                      <div class="input-field col s10">
-                       <input id="email" type="email" class="validate">
+                       <input name="email" type="email" class="validate">
                        <label for="email">Email</label>
                      </div>
                    </div>
                     <div class="row">
                       <div class="input-field col s10">
-                        <input id="password" type="password" class="validate">
+                        <input name="password" type="password" class="validate">
                         <label for="password">Password</label>
                       </div>
                     </div>
